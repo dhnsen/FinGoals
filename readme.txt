@@ -1,1 +1,0 @@
-This is initially planned as a tool to create, prioritize and track financial goals.
