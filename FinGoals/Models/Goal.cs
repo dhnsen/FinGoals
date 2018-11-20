@@ -8,21 +8,25 @@ namespace FinGoals.Models
 {
     public class Goal
     {
-        [Required]
-        public ApplicationUser User { get; set; }
-
         public int Id { get; set; }
 
         [Required]
-        [StringLength(255)]
+        public string ApplicationUserId { get; set; }
+
+        public ApplicationUser ApplicationUser { get; set; }
+
+        [Required]
         public string Name { get; set; }
 
         [Required]
-        public Decimal Amount { get; set; }
+        public decimal Amount { get; set; }
 
+        [Required]
         public DateTime DueDate { get; set; }
 
+        public string Description { get; set; }
+
         public bool IsActive { get; set; } = true;
-        
+
     }
 }

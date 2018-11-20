@@ -128,3 +128,4 @@ C:\Users\Admin\source\repos\FinGoals\FinGoals\obj\Debug\FinGoals.Migrations.AddG
 C:\Users\Admin\source\repos\FinGoals\FinGoals\obj\Debug\FinGoals.csproj.GenerateResource.cache
 C:\Users\Admin\source\repos\FinGoals\FinGoals\obj\Debug\FinGoals.Migrations.AddGoalDbSet.resources
 C:\Users\Admin\source\repos\FinGoals\FinGoals\obj\Debug\FinGoals.Migrations.overrideConventionsForGoals.resources
+C:\Users\Admin\source\repos\FinGoals\FinGoals\obj\Debug\FinGoals.Migrations.updatedGoalClass.resources

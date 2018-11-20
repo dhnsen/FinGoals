@@ -1,38 +1,49 @@
-﻿@model FinGoals.Models.Goal
+﻿@model FinGoals.ViewModels.GoalFormViewModel
 @{
-    ViewBag.Title = "Create";
+                /**/
+
+                ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Add Goal</h2>
 
-@using (Html.BeginForm("Create", "Gigs"))
+@using (Html.BeginForm("Create", "Goals"))
 {
-
+    @Html.AntiForgeryToken()
     <div class="form-group">
         @Html.LabelFor(m => m.Name)
-        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Name)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Amount)
         @Html.TextBoxFor(m => m.Amount, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.DueDate)<br />
-        @Html.EditorFor(m => m.DueDate, new { htmlAttributes = new { @class = "form-control date-picker", autocomplete = "off" } })
+        @Html.LabelFor(m => m.DueDate)
+        @Html.TextBoxFor(m => m.DueDate, new { @class = "form-control", @id = "datepicker", @Value = @DateTime.Now.ToShortDateString() })
 
+        @Html.ValidationMessageFor(m => m.Name)
     </div>
-    <div class="form-group"></div>
-    <button type="button" class="btn btn-primary">Submit</button>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description) (Optional)
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <span style="color: red; font-weight: bold;"> @ViewBag.PostMessage</span>
 }
-
 @section scripts
-    {
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("https://code.jquery.com/jquery-1.12.4.js")
+    @Scripts.Render("https://code.jquery.com/ui/1.12.1/jquery-ui.js")
+
     <script>
         $(function () {
-            $(".date-picker").datepicker();
+            $("#datepicker").datepicker();
         });
     </script>
 }
+
+

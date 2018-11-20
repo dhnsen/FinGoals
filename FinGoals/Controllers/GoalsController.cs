@@ -1,4 +1,5 @@
 ﻿using FinGoals.Models;
+using FinGoals.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -12,32 +13,55 @@ namespace FinGoals.Controllers
     public class GoalsController : Controller
     {
 
-        private ApplicationDbContext _context;
-
-        public GoalsController()
-        {
-            _context = new ApplicationDbContext();
-        }
+        // GET: goals
+        [Authorize]
         public ActionResult Create()
         {
+            ViewBag.PostMessage = "";
+            var viewModel = new GoalFormViewModel
+            {
 
-
-            return View();
+            };
+            return View(viewModel);
         }
+
+        [Authorize]
         [HttpPost]
-        public ActionResult Create(Goal formGoal)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(GoalFormViewModel viewModel)
         {
-            var userId = User.Identity.GetUserId();
+            ViewBag.PostMessage = "";
+            if (!ModelState.IsValid)
+            {
+                ViewBag.PostMessage = "Save Failed";
+                return View("Create", viewModel);
+            }
+            var context = new ApplicationDbContext();
             var goal = new Goal
             {
-                User = _context.Users.Single(u => u.Id == userId),
-                DueDate = formGoal.DueDate,
-                Amount = formGoal.Amount,
-                Name = formGoal.Name
+                ApplicationUserId = User.Identity.GetUserId(),
+                Name = viewModel.Name,
+                Amount = viewModel.Amount,
+                DueDate = viewModel.DueDate,
+                Description = viewModel.Description
+
             };
-            _context.Goals.Add(goal);
-            _context.SaveChanges();
+
+            context.Goals.Add(goal);
+            context.SaveChanges();
+
             return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize]
+        public ActionResult MyGoals()
+        {
+            var userId = User.Identity.GetUserId();
+            var context = new ApplicationDbContext();
+            var upcomingGoals = context.Goals
+                .Where(g => g.ApplicationUserId == userId)
+                ;
+            return View(upcomingGoals);
         }
     }
 }
