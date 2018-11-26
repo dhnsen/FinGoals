@@ -1,4 +1,5 @@
 ﻿using FinGoals.Models;
+using FinGoals.Dto;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace FinGoals.Api
 
         // GET api/<controller>
         [Authorize]
-        public IEnumerable<Goal> Get()
+        public IEnumerable<GoalDto> Get()
         {
         //    Goal[] goals = new Goal[]
         //{
@@ -27,8 +28,17 @@ namespace FinGoals.Api
             var goals = _context.Goals
                 .Where(g => g.ApplicationUserId == userId && g.IsActive == true)
                 .ToList();
+            var goalDtos = goals.Select(g => new GoalDto()
+            {
+                Id = g.Id,
+                Name = g.Name,
+                Amount = g.Amount,
+                DueDate = g.DueDate,
+                Description = g.Description
+            })
+            .ToList();
 
-            return goals;
+            return goalDtos;
         }
     }
 }
