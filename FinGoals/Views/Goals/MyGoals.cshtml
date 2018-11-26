@@ -10,19 +10,25 @@
 @section scripts{
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
 
+    
+
     <script>
+        var goals = [];
         var uri = '/api/goals/';
 
         function formatItem(item) {
-            return item.Name + ', $' + item.Amount;
+            return "Name:" + item.Name + ', Amount: $' + item.Amount + "Due Date: " + item.DueDate + "Description: " + item.Description;
         }
+        //properties of a goal
+        //id, applicationuserid, name, amount, duedate, description, isactive
 
         $(document).ready(function () {
             // Send an AJAX request
             $.getJSON(uri)
                 .done(function (data) {
                     // On success, 'data' contains a list of goals.
-                    $.each(data, function (key, item) {
+                    goals = data;
+                    $.each(goals, function (key, item) {
                         // Add a list item for the goal.
                         $('<li>', { text: formatItem(item) }).appendTo($('#goals'));
                     });
