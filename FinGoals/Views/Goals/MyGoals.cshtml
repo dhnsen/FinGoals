@@ -7,10 +7,12 @@
 
 <div><ul id="goals" /></div>
 
+<canvas id="bar-chart-horizontal" width="800" height="450"></canvas>
+
 @section scripts{
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
 
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
     <script>
         var goals = [];
@@ -33,6 +35,27 @@
                         $('<li>', { text: formatItem(item) }).appendTo($('#goals'));
                     });
                 });
+        });
+        let barName = JSON.stringify(goals[0].Name);
+        new Chart(document.getElementById("bar-chart-horizontal"), {
+            type: 'horizontalBar',
+            data: {
+                labels: [barName],
+                datasets: [
+                    {
+                        label: "Population (millions)",
+                        backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                        data: [2478]
+                    }
+                ]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Predicted world population (millions) in 2050'
+                }
+            }
         });
     </script>
 }
