@@ -7,7 +7,7 @@
 
 <div><ul id="goals" /></div>
 
-<canvas id="bar-chart-horizontal" width="800" height="450"></canvas>
+<canvas id="goalChart1"></canvas>
 
 @section scripts{
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
@@ -15,7 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
     <script>
-        var goals = [];
+        let goals = [];
         var uri = '/api/goals/';
 
         function formatItem(item) {
@@ -23,39 +23,40 @@
         }
         //properties of a goal
         //id, applicationuserid, name, amount, duedate, description, isactive
-
+        
         $(document).ready(function () {
             // Send an AJAX request
             $.getJSON(uri)
                 .done(function (data) {
                     // On success, 'data' contains a list of goals.
-                    goals = data;
-                    $.each(goals, function (key, item) {
-                        // Add a list item for the goal.
+                    
+                    $.each(data, function (key, item) {
+                        // print them out in an html list.
                         $('<li>', { text: formatItem(item) }).appendTo($('#goals'));
+
+                        //create goal objects and assign to an array
+                        let dueDate = new Date(item.DueDate + 'Z');
+                        let goal = {
+                            name: item.Name,
+                            amount: item.Amount,
+                            dueDate: dueDate,
+                            description: item.Description
+                        }
+                        goals.push(goal);
+                        var ctx = document.getElementById("goalChart1").getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'horizontalBar',
+                            data: {
+                                labels: [goal.name],
+                                datasets: [{
+                                    data: [goal.amount]
+                                }]
+                            }
+                        });
                     });
                 });
+            
         });
-        let barName = JSON.stringify(goals[0].Name);
-        new Chart(document.getElementById("bar-chart-horizontal"), {
-            type: 'horizontalBar',
-            data: {
-                labels: [barName],
-                datasets: [
-                    {
-                        label: "Population (millions)",
-                        backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-                        data: [2478]
-                    }
-                ]
-            },
-            options: {
-                legend: { display: false },
-                title: {
-                    display: true,
-                    text: 'Predicted world population (millions) in 2050'
-                }
-            }
-        });
+        
     </script>
 }
