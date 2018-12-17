@@ -7,7 +7,7 @@
 
 <div><ul id="goals" /></div>
 
-<canvas id="goalChart1"></canvas>
+<canvas id="goalChart1" height="25px"></canvas>
 
 @section scripts{
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
@@ -17,7 +17,7 @@
     <script>
         let goals = [];
         var uri = '/api/goals/';
-
+        
         function formatItem(item) {
             return "Name:" + item.Name + ', Amount: $' + item.Amount + "Due Date: " + item.DueDate + "Description: " + item.Description;
         }
@@ -49,9 +49,16 @@
                             data: {
                                 labels: [goal.name],
                                 datasets: [{
-                                    data: [goal.amount]
-                                }]
-                            }
+                                    data: [item.Amount * .5]
+                                }],
+                                ticks: {
+                                    min: 0,
+                                    max: item.Amount,
+                                    stepSize: 10
+                                }   
+                            },
+                            BarThickness: 15
+                            
                         });
                     });
                 });
