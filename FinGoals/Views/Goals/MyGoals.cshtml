@@ -7,7 +7,7 @@
 
 <div><ul id="goals" /></div>
 
-<canvas id="goalChart1" height="25px"></canvas>
+
 
 @section scripts{
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
@@ -18,8 +18,8 @@
         let goals = [];
         var uri = '/api/goals/';
         
-        function formatItem(item) {
-            return "Name:" + item.Name + ', Amount: $' + item.Amount + "Due Date: " + item.DueDate + "Description: " + item.Description;
+        function createCanvas(i) {
+            return '(<li><canvas id=\"goalChart' + i + '\" height=\"25px\"></canvas>).appendTo($(\'#goals\'));';
         }
         //properties of a goal
         //id, applicationuserid, name, amount, duedate, description, isactive
@@ -31,9 +31,9 @@
                     // On success, 'data' contains a list of goals.
                     
                     $.each(data, function (key, item) {
-                        // print them out in an html list.
-                        $('<li>', { text: formatItem(item) }).appendTo($('#goals'));
+                        var i = 1;
 
+                        createCanvas(i);
                         //create goal objects and assign to an array
                         let dueDate = new Date(item.DueDate + 'Z');
                         let goal = {
@@ -43,7 +43,7 @@
                             description: item.Description
                         }
                         goals.push(goal);
-                        var ctx = document.getElementById("goalChart1").getContext('2d');
+                        var ctx = document.getElementById("goalChart" + i).getContext('2d');
                         var myChart = new Chart(ctx, {
                             type: 'horizontalBar',
                             data: {
@@ -60,6 +60,7 @@
                             BarThickness: 15
                             
                         });
+                        i++;
                     });
                 });
             
