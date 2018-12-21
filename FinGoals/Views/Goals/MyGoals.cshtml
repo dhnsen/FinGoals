@@ -5,8 +5,9 @@
 
 <h2>MyGoals</h2>
 
-<div><ul id="goals" /></div>
+<div><ul id="goalList" /></div>
 
+<div id="goalCharts"></div> 
 
 
 @section scripts{
@@ -18,23 +19,13 @@
         let goals = [];
         var uri = '/api/goals/';
         
-        function createCanvas(i) {
-            return '(<li><canvas id=\"goalChart' + i + '\" height=\"25px\"></canvas>).appendTo($(\'#goals\'));';
-        }
-        //properties of a goal
-        //id, applicationuserid, name, amount, duedate, description, isactive
-        
-        $(document).ready(function () {
-            // Send an AJAX request
+        function getGoals() {
             $.getJSON(uri)
                 .done(function (data) {
                     // On success, 'data' contains a list of goals.
-                    
-                    $.each(data, function (key, item) {
-                        var i = 1;
 
-                        createCanvas(i);
-                        //create goal objects and assign to an array
+                    $.each(data, function (key, item) {
+                        
                         let dueDate = new Date(item.DueDate + 'Z');
                         let goal = {
                             name: item.Name,
@@ -43,28 +34,44 @@
                             description: item.Description
                         }
                         goals.push(goal);
-                        var ctx = document.getElementById("goalChart" + i).getContext('2d');
-                        var myChart = new Chart(ctx, {
-                            type: 'horizontalBar',
-                            data: {
-                                labels: [goal.name],
-                                datasets: [{
-                                    data: [item.Amount * .5]
-                                }],
-                                ticks: {
-                                    min: 0,
-                                    max: item.Amount,
-                                    stepSize: 10
-                                }   
-                            },
-                            BarThickness: 15
-                            
-                        });
-                        i++;
+                        
                     });
                 });
-            
+        };
+
+        function createCanvases() {
+            for (i = 0; i < goals.length; i++) {
+                var divNode = document.createElement("DIV");
+                divNode.setAttribute("id", "goalDiv" + i);
+                var canvasNode = document.createElement("CANVAS");
+                canvasNode.setAttribute("id", "goalCanvas" + i);
+                divNode.appendChild(canvasNode);
+                document.body.appendChild(divNode);
+            };
+        };
+
+        function createCharts() {
+            for (i = 0; i < goals.length; i++) {
+                var ctx = document.getElementById("goalCanvas" + i).getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'horizontalBar',
+                    data: {
+                        labels: [goals[i].Name],
+                        datasets: [{
+                            data: [goals[i].Amount * .5]
+                        }],
+
+                    },
+                    BarThickness: 15
+
+                });
+            };
+        };
+
+        $(document).ready(function () {
+            getGoals();
+            createCanvases();
+            createCharts();
         });
-        
     </script>
 }
