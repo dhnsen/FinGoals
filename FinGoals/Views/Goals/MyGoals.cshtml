@@ -83,13 +83,17 @@
                         legend: {
                             display: false
                         },
-                        xAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                                stepSize: goals[i],
-                                unitStepSize: 5
-                            }
-                        }]
+                        scales: {
+                            xAxes: [{
+                                
+                                ticks: {
+                                    beginAtZero: true,
+                                    min: 0,
+                                    max: goals[i].Amount
+                                    
+                                }
+                            }]
+                        }
                     }
 
                 });
