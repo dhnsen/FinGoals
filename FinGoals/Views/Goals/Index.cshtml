@@ -1,0 +1,15 @@
+﻿@model IEnumerable<FinGoals.Models.Goal>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@{
+    var goalChart = new Chart(width: 600, height: 400)
+                      .AddTitle("Goal Progress")
+                      .AddSeries("Default", 
+                      xValue: Model, xField: "Name",
+                      yValues: Model, yFields: "Amount")
+                      .Write();
+}

@@ -12,16 +12,24 @@ namespace FinGoals.Controllers
     [Authorize]
     public class GoalsController : Controller
     {
-
         // GET: goals
+        [Authorize]
+        public ActionResult Index()
+        {
+            var userId = User.Identity.GetUserId();
+            var context = new ApplicationDbContext();
+            var upcomingGoals = context.Goals
+                .Where(g => g.ApplicationUserId == userId)
+                ;
+            return View(upcomingGoals);
+        }
+
+
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.PostMessage = "";
-            var viewModel = new GoalFormViewModel
-            {
 
-            };
+            GoalFormViewModel viewModel = new GoalFormViewModel();
             return View(viewModel);
         }
 
