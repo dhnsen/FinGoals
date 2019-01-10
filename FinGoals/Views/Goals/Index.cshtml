@@ -1,15 +1,90 @@
 ﻿@model IEnumerable<FinGoals.Models.Goal>
 @{
-    ViewBag.Title = "Index";
+                /**/
+
+                ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
+<br />
+<div id="goalsChart"></div>
 
-@{
-    var goalChart = new Chart(width: 600, height: 400)
-                      .AddTitle("Goal Progress")
-                      .AddSeries("Default", 
-                      xValue: Model, xField: "Name",
-                      yValues: Model, yFields: "Amount")
-                      .Write();
+@section scripts{
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <script>
+        let goals = [];
+        var uri = '/api/goals/';
+
+        function getGoals() {
+            $.getJSON(uri)
+                .done(function (data) {
+                    // On success, 'data' contains a list of goals.
+
+                    $.each(data, function (key, item) {
+
+                        let dueDate = new Date(item.DueDate + 'Z');
+                        let goal = {
+                            Name: item.Name,
+                            Amount: item.Amount,
+                            DueDate: dueDate,
+                            Description: item.Description
+                        }
+                        goals.push(goal);
+
+                    });
+                    createCanvas();
+
+                });
+
+        };
+
+        function createCanvas() {
+            var i = 0;
+            var div = document.getElementById("goalsChart");
+
+            for (i = 0; i < goals.length; i++) {
+
+                var divNode = document.createElement("DIV");
+                divNode.setAttribute("id", "goalDiv" + i);
+                divNode.setAttribute("style", "height: 100px;");
+                var canvasNode = document.createElement("CANVAS");
+                canvasNode.setAttribute("id", "goalsCanvas" + i);
+                canvasNode.setAttribute("style", "width: 100%; height: 100px;");
+                divNode.appendChild(canvasNode);
+                div.appendChild(divNode);
+
+            };
+            createChart();
+        };
+        function createCharts() {
+                       
+            var ctx = document.getElementById("goalsCanvas" + i).getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'horizontalBar',
+                data: {
+                    labels: [goals[i].Name],
+                    datasets: [{
+                        label: goals[i].Name,
+                        data: [goals[i].Amount * .5],
+                        backgroundColor: [
+                            'rgb(76, 191, 63)'
+                        ],
+                    }]
+
+                },
+                    
+            });
+            
+
+        };
+
+        $(document).ready(function () {
+            getGoals();
+            
+            
+        });
+    </script>
 }
