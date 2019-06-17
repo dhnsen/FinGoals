@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<FinGoals.Models.Goal>
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Index";
+    ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
 <br />
-<div id="goalsChart"></div>
+<div id="goals-div"></div>
 
 @section scripts{
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
@@ -33,58 +33,22 @@
                             Description: item.Description
                         }
                         goals.push(goal);
-
                     });
-                    createCanvas();
-
                 });
-
-        };
-
-        function createCanvas() {
-            var i = 0;
-            var div = document.getElementById("goalsChart");
-
-            for (i = 0; i < goals.length; i++) {
-
-                var divNode = document.createElement("DIV");
-                divNode.setAttribute("id", "goalDiv" + i);
-                divNode.setAttribute("style", "height: 100px;");
-                var canvasNode = document.createElement("CANVAS");
-                canvasNode.setAttribute("id", "goalsCanvas" + i);
-                canvasNode.setAttribute("style", "width: 100%; height: 100px;");
-                divNode.appendChild(canvasNode);
-                div.appendChild(divNode);
-
+            function printGoals() {
+                    for (var i = 0; i < goals.length; i++) {
+                        goals[i].Name;
+                    }
             };
-            createChart();
+            document.getElementById('goals-div').innerHTML =
+                printGoals
         };
-        function createCharts() {
-                       
-            var ctx = document.getElementById("goalsCanvas" + i).getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'horizontalBar',
-                data: {
-                    labels: [goals[i].Name],
-                    datasets: [{
-                        label: goals[i].Name,
-                        data: [goals[i].Amount * .5],
-                        backgroundColor: [
-                            'rgb(76, 191, 63)'
-                        ],
-                    }]
 
-                },
-                    
-            });
-            
 
-        };
 
         $(document).ready(function () {
             getGoals();
-            
-            
+
         });
     </script>
 }
