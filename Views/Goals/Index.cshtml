@@ -7,6 +7,11 @@
 <p>
     <a asp-action="Create">Add a Goal!</a>
 </p>
+<h4>Amount Saved</h4>
+<form class="savings-amount-form">
+    <input type="text" id="edit-amount" placeholder="@Model.UserTotalSavings">
+    <input class="btn btn-primary" type="submit" value="Update">
+</form>
 
 <div id="goals-section">
     @{
