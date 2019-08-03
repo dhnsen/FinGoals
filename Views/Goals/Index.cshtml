@@ -9,40 +9,45 @@
 </p>
 
 
-@{ 
+@{
     // this is a stand-in for the total amount saved
-    var globalSavingsToDistribute = 3000.0;
+    var userTotalSavings = 3000.0;
 
-}
+    var savingsToDistribute = userTotalSavings;
 
-
-@foreach (var item in Model) {
-
-    var amountSaved = 0.0;
-    if(item.Amount < globalSavingsToDistribute)
+    foreach (var item in Model)
     {
-        amountSaved = item.Amount;
-        globalSavingsToDistribute -= amountSaved;
-    } else
-    {
-        amountSaved = globalSavingsToDistribute;
-        globalSavingsToDistribute = 0;
-    }
-    var percentSaved = amountSaved / item.Amount;
-    var barWidth = percentSaved * 100;
-    string barStyle = "bg-danger";
 
-    if(barWidth > 24)
-    {
-        barStyle = "bg-warning";
-    }
-    if(barWidth > 74)
-    {
-        barStyle = "bg-success";
-    }
-    
+        var amountSaved = 0.0;
+        if (item.Amount < savingsToDistribute)
+        {
+            amountSaved = item.Amount;
+            savingsToDistribute -= amountSaved;
+        }
+        else
+        {
+            amountSaved = savingsToDistribute;
+            savingsToDistribute = 0;
+        }
+        var percentSaved = amountSaved / item.Amount;
+        var barWidth = percentSaved * 100;
+        if (barWidth == 0)
+        {
+            barWidth = 1;
+        }
+        string barStyle = "bg-danger";
 
-<div>@percentSaved</div>
+        if (barWidth > 24)
+        {
+            barStyle = "bg-warning";
+        }
+        if (barWidth > 74)
+        {
+            barStyle = "bg-success";
+        }
+
+
+        <div>@percentSaved</div>
 
         <div class="goal-container">
             <div class="goal-container-info">
@@ -58,14 +63,14 @@
                 </div>
             </div>
             <div>
-                
+
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </div>
         </div>
 
-                @Html.DisplayFor(modelItem => item.Description)
+        @Html.DisplayFor(modelItem => item.Description)
 
-                @Html.DisplayFor(modelItem => item.IsComplete)
+        @Html.DisplayFor(modelItem => item.IsComplete)
 
-}
+    }
