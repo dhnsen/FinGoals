@@ -13,5 +13,10 @@ namespace FinGoals.Models
         [Key]
         public string Id { get; set; }
         public double Amount { get; set; }
+
+        public static implicit operator SavingsAmount(int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

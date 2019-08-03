@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FinGoals.Data;
 using FinGoals.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FinGoals.Controllers
 {
@@ -15,33 +17,44 @@ namespace FinGoals.Controllers
     public class SavingsAmountController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public SavingsAmountController(ApplicationDbContext context)
+        public SavingsAmountController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
+
         }
 
         // GET: api/SavingsAmount
+        [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SavingsAmount>>> GetSavingsAmounts()
+        public async Task<ActionResult<SavingsAmount>> GetSavingsAmount()
         {
-            return await _context.SavingsAmounts.ToListAsync();
-        }
+            // get Id of current user
+            // What does Identity do? NO ONE KNOWS!
+            // Are you ready for the magic??
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            string id = user.Id;
 
-        // GET: api/SavingsAmount/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<SavingsAmount>> GetSavingsAmount(string id)
-        {
+            // get savingsAmount if there is one
             var savingsAmount = await _context.SavingsAmounts.FindAsync(id);
 
+            // if there isn't, make one and save it
             if (savingsAmount == null)
             {
-                return NotFound();
+                savingsAmount = new SavingsAmount()
+                {
+                    Id = id,
+                    Amount = 0
+                };
+                _context.Add(savingsAmount);
+                _context.SaveChanges();
             }
-
             return savingsAmount;
         }
 
+        [Authorize]
         // PUT: api/SavingsAmount/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSavingsAmount(string id, SavingsAmount savingsAmount)
@@ -70,32 +83,6 @@ namespace FinGoals.Controllers
             }
 
             return NoContent();
-        }
-
-        // POST: api/SavingsAmount
-        [HttpPost]
-        public async Task<ActionResult<SavingsAmount>> PostSavingsAmount(SavingsAmount savingsAmount)
-        {
-            _context.SavingsAmounts.Add(savingsAmount);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetSavingsAmount", new { id = savingsAmount.Id }, savingsAmount);
-        }
-
-        // DELETE: api/SavingsAmount/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<SavingsAmount>> DeleteSavingsAmount(string id)
-        {
-            var savingsAmount = await _context.SavingsAmounts.FindAsync(id);
-            if (savingsAmount == null)
-            {
-                return NotFound();
-            }
-
-            _context.SavingsAmounts.Remove(savingsAmount);
-            await _context.SaveChangesAsync();
-
-            return savingsAmount;
         }
 
         private bool SavingsAmountExists(string id)
