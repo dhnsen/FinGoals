@@ -10,16 +10,16 @@ using FinGoals.Models;
 
 namespace FinGoals.Controllers
 {
-    public class SavingsAmountsController : Controller
+    public class SavingsAmountController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public SavingsAmountsController(ApplicationDbContext context)
+        public SavingsAmountController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: SavingsAmounts/Details/5
+        // GET: SavingsAmount/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -37,7 +37,7 @@ namespace FinGoals.Controllers
             return View(savingsAmount);
         }
 
-        // GET: SavingsAmounts/Edit/5
+        // GET: SavingsAmount/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -53,7 +53,7 @@ namespace FinGoals.Controllers
             return View(savingsAmount);
         }
 
-        // POST: SavingsAmounts/Edit/5
+        // POST: SavingsAmount/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
