@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using FinGoals.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using FinGoals.Models;
 
 namespace FinGoals
 {
@@ -37,14 +36,11 @@ namespace FinGoals
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
+                options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddDbContext<SavingsGoalContext>(options =>
-            options.UseSqlite(
-                Configuration.GetConnectionString("SavingsGoalContext")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

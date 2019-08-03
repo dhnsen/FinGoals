@@ -1,0 +1,71 @@
+﻿@model IEnumerable<FinGoals.Models.Goal>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    <a asp-action="Create">Add a Goal!</a>
+</p>
+
+
+@{ 
+    // this is a stand-in for the total amount saved
+    var globalSavingsToDistribute = 3000.0;
+
+}
+
+
+@foreach (var item in Model) {
+
+    var amountSaved = 0.0;
+    if(item.Amount < globalSavingsToDistribute)
+    {
+        amountSaved = item.Amount;
+        globalSavingsToDistribute -= amountSaved;
+    } else
+    {
+        amountSaved = globalSavingsToDistribute;
+        globalSavingsToDistribute = 0;
+    }
+    var percentSaved = amountSaved / item.Amount;
+    var barWidth = percentSaved * 100;
+    string barStyle = "bg-danger";
+
+    if(barWidth > 24)
+    {
+        barStyle = "bg-warning";
+    }
+    if(barWidth > 74)
+    {
+        barStyle = "bg-success";
+    }
+    
+
+<div>@percentSaved</div>
+
+        <div class="goal-container">
+            <div class="goal-container-info">
+                <h3 class="goal-title">@Html.DisplayFor(modelItem => item.Name)</h3>
+                <p class="goal-amount-paid"><strong>$@amountSaved of $@Html.DisplayFor(modelItem => item.Amount)</strong></p>
+            </div>
+            <br>
+            <br>
+            <div class="goal-container-progress">
+                <div class="progress">
+                    <div class="progress-bar @barStyle" role="progressbar" style="width: @barWidth%" aria-valuenow="@barWidth"
+                         aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+            <div>
+                
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </div>
+        </div>
+
+                @Html.DisplayFor(modelItem => item.Description)
+
+                @Html.DisplayFor(modelItem => item.IsComplete)
+
+}
