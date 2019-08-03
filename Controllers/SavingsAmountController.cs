@@ -7,39 +7,27 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FinGoals.Data;
 using FinGoals.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace FinGoals.Controllers
 {
     public class SavingsAmountController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public SavingsAmountController(ApplicationDbContext context)
+        public SavingsAmountController(ApplicationDbContext context,
+            UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
-
-        // GET: SavingsAmount/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var savingsAmount = await _context.SavingsAmounts
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (savingsAmount == null)
-            {
-                return NotFound();
-            }
-
-            return View(savingsAmount);
-        }
-
+        
         // GET: SavingsAmount/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit()
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            string id = user.Id;
             if (id == null)
             {
                 return NotFound();
