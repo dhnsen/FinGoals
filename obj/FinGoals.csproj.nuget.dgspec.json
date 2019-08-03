@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dan\\Desktop\\FinGoals\\FinGoals\\FinGoals.csproj": {}
+    "C:\\Users\\Dan\\Desktop\\FinGoals\\FinGoals.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dan\\Desktop\\FinGoals\\FinGoals\\FinGoals.csproj": {
+    "C:\\Users\\Dan\\Desktop\\FinGoals\\FinGoals.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dan\\Desktop\\FinGoals\\FinGoals\\FinGoals.csproj",
+        "projectUniqueName": "C:\\Users\\Dan\\Desktop\\FinGoals\\FinGoals.csproj",
         "projectName": "FinGoals",
-        "projectPath": "C:\\Users\\Dan\\Desktop\\FinGoals\\FinGoals\\FinGoals.csproj",
+        "projectPath": "C:\\Users\\Dan\\Desktop\\FinGoals\\FinGoals.csproj",
         "packagesPath": "C:\\Users\\Dan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dan\\Desktop\\FinGoals\\FinGoals\\obj\\",
+        "outputPath": "C:\\Users\\Dan\\Desktop\\FinGoals\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -57,6 +57,10 @@
               "target": "Package",
               "version": "[2.2.0, )",
               "autoReferenced": true
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[2.2.3, )"
             }
           },
           "imports": [
