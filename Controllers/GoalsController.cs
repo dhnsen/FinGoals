@@ -25,9 +25,9 @@ namespace FinGoals.Controllers
                 _context.Goals.Add(
                     new Goal
                     {
-                        Name = "First Goal",
-                        Amount = 1.00,
-                        Description = "This is your first goal!"
+                        Name = "Emergency Fund",
+                        Amount = 1000.00,
+                        Description = "One of the most important things to save for is an emergency. This is recommended as a first step."
                     }
                     );
                 _context.SaveChanges();
@@ -35,9 +35,15 @@ namespace FinGoals.Controllers
         }
 
         // GET: Goals
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Goals.ToListAsync());
+            GoalIndexViewModel viewModel = new GoalIndexViewModel
+            {
+                UserTotalSavings = 3500.00,
+                Goals = _context.Goals.ToArray()
+            };
+
+            return View(viewModel);
         }
 
         // GET: Goals/Details/5

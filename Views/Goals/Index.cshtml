@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FinGoals.Models.Goal>
+﻿@model GoalIndexViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -8,69 +8,67 @@
     <a asp-action="Create">Add a Goal!</a>
 </p>
 
+<div id="goals-section">
+    @{
 
-@{
-    // this is a stand-in for the total amount saved
-    var userTotalSavings = 3000.0;
+        var savingsToDistribute = Model.UserTotalSavings;
 
-    var savingsToDistribute = userTotalSavings;
+        var totalSavingsRequired = 0.0;
 
-    foreach (var item in Model)
-    {
-
-        var amountSaved = 0.0;
-        if (item.Amount < savingsToDistribute)
+        foreach (var goal in Model.Goals)
         {
-            amountSaved = item.Amount;
-            savingsToDistribute -= amountSaved;
-        }
-        else
-        {
-            amountSaved = savingsToDistribute;
-            savingsToDistribute = 0;
-        }
-        var percentSaved = amountSaved / item.Amount;
-        var barWidth = percentSaved * 100;
-        if (barWidth == 0)
-        {
-            barWidth = 1;
-        }
-        string barStyle = "bg-danger";
+            totalSavingsRequired += goal.Amount;
+            var amountSaved = 0.0;
+            if (goal.Amount < savingsToDistribute)
+            {
+                amountSaved = goal.Amount;
+                savingsToDistribute -= amountSaved;
+            }
+            else
+            {
+                amountSaved = savingsToDistribute;
+                savingsToDistribute = 0;
+            }
+            var percentSaved = amountSaved / goal.Amount;
+            var barWidth = percentSaved * 100;
+            if (barWidth == 0)
+            {
+                barWidth = 1;
+            }
+            string barStyle = "bg-danger";
 
-        if (barWidth > 24)
-        {
-            barStyle = "bg-warning";
-        }
-        if (barWidth > 74)
-        {
-            barStyle = "bg-success";
-        }
+            if (barWidth > 24)
+            {
+                barStyle = "bg-warning";
+            }
+            if (barWidth > 74)
+            {
+                barStyle = "bg-success";
+            }
 
+            <div class="goal-container">
+                <div class="goal-container-info">
+                    <h3 class="goal-title">@Html.DisplayFor(modelItem => goal.Name)</h3>
+                    <p class="goal-amount-paid"><strong>$@amountSaved of $@Html.DisplayFor(modelItem => goal.Amount)</strong></p>
+                </div>
+                <br>
+                <br>
+                <div class="goal-container-progress">
+                    <div class="progress">
+                        <div class="progress-bar @barStyle" role="progressbar" style="width: @barWidth%" aria-valuenow="@barWidth"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div>
 
-        <div>@percentSaved</div>
-
-        <div class="goal-container">
-            <div class="goal-container-info">
-                <h3 class="goal-title">@Html.DisplayFor(modelItem => item.Name)</h3>
-                <p class="goal-amount-paid"><strong>$@amountSaved of $@Html.DisplayFor(modelItem => item.Amount)</strong></p>
-            </div>
-            <br>
-            <br>
-            <div class="goal-container-progress">
-                <div class="progress">
-                    <div class="progress-bar @barStyle" role="progressbar" style="width: @barWidth%" aria-valuenow="@barWidth"
-                         aria-valuemin="0" aria-valuemax="100"></div>
+                    <a asp-action="Edit" asp-route-id="@goal.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@goal.Id">Delete</a>
                 </div>
             </div>
-            <div>
-
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </div>
-        </div>
-
-        @Html.DisplayFor(modelItem => item.Description)
-
-        @Html.DisplayFor(modelItem => item.IsComplete)
-
+            <br />
+        }
+        <div id="savings-amount"><h3>
+    Total Saved: $@Model.UserTotalSavings of $@totalSavingsRequired
+</h3></div>
     }
+</div>

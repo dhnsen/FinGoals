@@ -15,5 +15,6 @@ namespace FinGoals.Data
         }
 
         public DbSet<Goal> Goals { get; set; }
+        public DbSet<SavingsAmount> SavingsAmounts {get; set;}
     }
 }

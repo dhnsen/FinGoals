@@ -78,3 +78,7 @@ body {
 .goal-amount-paid {
     float: right;
 }
+
+#savings-amount {
+    margin: 0 auto;
+}
