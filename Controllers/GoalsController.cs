@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FinGoals.Data;
 using FinGoals.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FinGoals.Controllers
 {
@@ -16,7 +17,7 @@ namespace FinGoals.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public GoalsController(ApplicationDbContext context, 
+        public GoalsController(ApplicationDbContext context,
             UserManager<IdentityUser> userManager)
         {
             _context = context;
