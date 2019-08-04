@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FinGoals.Controllers
 {
+    [Authorize]
     public class GoalsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -40,6 +41,7 @@ namespace FinGoals.Controllers
         }
 
         // GET: Goals
+        
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
