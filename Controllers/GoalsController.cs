@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +14,13 @@ namespace FinGoals.Controllers
     public class GoalsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public GoalsController(ApplicationDbContext context)
+        public GoalsController(ApplicationDbContext context, 
+            UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
 
             if (_context.Goals.Count() == 0)
             {
@@ -35,11 +39,26 @@ namespace FinGoals.Controllers
         }
 
         // GET: Goals
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            string id = user.Id;
+            var savingsAmount = await _context.SavingsAmounts.FindAsync(id);
+
+            // if there isn't, make one and save it
+            if (savingsAmount == null)
+            {
+                savingsAmount = new SavingsAmount()
+                {
+                    Id = id,
+                    Amount = 0
+                };
+                _context.Add(savingsAmount);
+                _context.SaveChanges();
+            }
             GoalIndexViewModel viewModel = new GoalIndexViewModel
             {
-                UserTotalSavings = 3500.00,
+                UserTotalSavings = savingsAmount.Amount,
                 Goals = _context.Goals.ToArray()
             };
 

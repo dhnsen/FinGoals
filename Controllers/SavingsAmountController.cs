@@ -19,7 +19,8 @@ namespace FinGoals.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public SavingsAmountController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public SavingsAmountController(ApplicationDbContext context, 
+            UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
