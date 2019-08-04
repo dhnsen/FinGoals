@@ -2953,11 +2953,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views\\Goals\\Details.cshtml",
-      "TargetPath": "Views\\Goals\\Details.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "Views\\Home\\Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"

@@ -13,12 +13,15 @@ const getSavingsAmount = function() {
         if(this.status == 200){
             savingsAmount = JSON.parse(this.responseText);
             console.log(savingsAmount)
+            document.getElementById("amount-saved")
+            .value = savingsAmount.amount;
         }
     }
     xhr.send();
 }
 
 const updateSavingsAmount = function() {
+    savingsAmount.amount = document.getElementById("amount-saved").value;
     xhr = new XMLHttpRequest();
     let json = JSON.stringify(savingsAmount);
     xhr.open('PUT', 'https://localhost:5001/api/SavingsAmount');
@@ -27,10 +30,9 @@ const updateSavingsAmount = function() {
         console.log(xhr.status)
     }
     xhr.send(json);
+    document.location.reload()
 }
 
-document.getElementById('get-amount').addEventListener('click',
-getSavingsAmount);
 document.getElementById('update-amount').addEventListener('click',
 updateSavingsAmount);
 
