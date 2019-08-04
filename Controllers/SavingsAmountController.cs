@@ -54,18 +54,14 @@ namespace FinGoals.Controllers
             return savingsAmount;
         }
 
-        [Authorize]
         // PUT: api/SavingsAmount/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSavingsAmount(string id, SavingsAmount savingsAmount)
+        [Authorize]
+        [HttpPut]
+        public async Task<IActionResult> PutSavingsAmount(SavingsAmount savingsAmount)
         {
-            if (id != savingsAmount.Id)
-            {
-                return BadRequest();
-            }
-
+            
             _context.Entry(savingsAmount).State = EntityState.Modified;
-
+            var id = savingsAmount.Id;
             try
             {
                 await _context.SaveChangesAsync();

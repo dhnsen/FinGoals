@@ -99,7 +99,7 @@
     const updateSavingsAmount = function() {
         xhr = new XMLHttpRequest();
         let json = JSON.stringify(savingsAmount);
-        xhr.open('POST', 'https://localhost:5001/api/SavingsAmount');
+        xhr.open('PUT', 'https://localhost:5001/api/SavingsAmount');
         xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
         xhr.onload = function(){
             console.log(xhr.status)
