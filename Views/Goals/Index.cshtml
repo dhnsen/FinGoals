@@ -4,16 +4,21 @@
     ViewData["Title"] = "Index";
 }
 
-<p>
-    <a asp-action="Create">Add a Goal!</a>
-</p>
-<h4>Amount Saved:</h4>
-<button id="update-amount">Update Amount</button>
-<button id="get-amount">Get Amount</button>
-<br><br>
-<div id="amount-saved"></div>
+
+<div class="form-group" style="display: block; text-align: center;">
+    <h4>Savings Amount</h4>
+    <p>Enter the amount you've saved and press "Update"</p>
+    <div class="input-group mb-3" style="width: 250px; margin: 0 auto;">
+        <input type="text" class="form-control" id="amount-saved" >
+        &nbsp;
+        <button class="btn btn-primary" id="update-amount">Update Amount</button>
+    </div>
+</div>
 
 <div id="goals-section">
+    <p>
+    <a asp-action="Create">Add a Goal!</a>
+</p>
     @{
 
         var savingsToDistribute = Model.UserTotalSavings;
@@ -53,7 +58,7 @@
 
             <div class="goal-container">
                 <div class="goal-container-info">
-                    <h3 class="goal-title">@Html.DisplayFor(modelItem => goal.Name)</h3>
+                    <h4 class="goal-title">@Html.DisplayFor(modelItem => goal.Name)</h4>
                     <p class="goal-amount-paid"><strong>$@amountSaved of $@Html.DisplayFor(modelItem => goal.Amount)</strong></p>
                 </div>
                 <br>
@@ -78,39 +83,4 @@
     }
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-    
-    let savingsAmount;
 
-    //update amount
-    const getSavingsAmount = function() {
-        let xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://localhost:5001/api/SavingsAmount', true);
-
-        xhr.onload = function(){
-            if(this.status == 200){
-                savingsAmount = JSON.parse(this.responseText);
-                console.log(savingsAmount)
-            }
-        }
-        xhr.send();
-    }
-
-    const updateSavingsAmount = function() {
-        xhr = new XMLHttpRequest();
-        let json = JSON.stringify(savingsAmount);
-        xhr.open('PUT', 'https://localhost:5001/api/SavingsAmount');
-        xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-        xhr.onload = function(){
-            console.log(xhr.status)
-        }
-        xhr.send(json);
-    }
-
-    document.getElementById('get-amount').addEventListener('click',
-    getSavingsAmount);
-    document.getElementById('update-amount').addEventListener('click',
-    updateSavingsAmount);
-
-    $(document).ready(getSavingsAmount);
-</script>

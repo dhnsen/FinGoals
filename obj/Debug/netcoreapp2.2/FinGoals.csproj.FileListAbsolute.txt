@@ -37,7 +37,6 @@ C:\Users\Dan\Desktop\FinGoals\bin\Debug\netcoreapp2.2\FinGoals.dll
 C:\Users\Dan\Desktop\FinGoals\bin\Debug\netcoreapp2.2\FinGoals.pdb
 C:\Users\Dan\Desktop\FinGoals\bin\Debug\netcoreapp2.2\FinGoals.Views.dll
 C:\Users\Dan\Desktop\FinGoals\bin\Debug\netcoreapp2.2\FinGoals.Views.pdb
-C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\FinGoals.csprojAssemblyReference.cache
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\FinGoals.csproj.CoreCompileInputs.cache
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\FinGoals.RazorAssemblyInfo.cache
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\FinGoals.RazorAssemblyInfo.cs
@@ -47,6 +46,10 @@ C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\FinGoals.TagHelpers.input.
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\FinGoals.TagHelpers.output.cache
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\FinGoals.RazorCoreGenerate.cache
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewStart.g.cshtml.cs
+C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Goals\Create.g.cshtml.cs
+C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Goals\Delete.g.cshtml.cs
+C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Goals\Edit.g.cshtml.cs
+C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Goals\Index.g.cshtml.cs
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy.g.cshtml.cs
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
@@ -62,8 +65,4 @@ C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\FinGoals.Views.pdb
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\FinGoals.dll
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\FinGoals.pdb
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\FinGoals.csproj.CopyComplete
-C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Goals\Create.g.cshtml.cs
-C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Goals\Delete.g.cshtml.cs
-C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Goals\Details.g.cshtml.cs
-C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Goals\Edit.g.cshtml.cs
-C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Goals\Index.g.cshtml.cs
+C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\FinGoals.csprojAssemblyReference.cache
