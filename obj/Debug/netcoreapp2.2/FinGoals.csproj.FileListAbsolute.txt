@@ -48,7 +48,6 @@ C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\FinGoals.RazorCoreGenerate
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewStart.g.cshtml.cs
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Goals\Create.g.cshtml.cs
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Goals\Delete.g.cshtml.cs
-C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Goals\Details.g.cshtml.cs
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Goals\Edit.g.cshtml.cs
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Goals\Index.g.cshtml.cs
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs

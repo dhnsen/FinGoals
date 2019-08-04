@@ -23,21 +23,6 @@ namespace FinGoals.Controllers
         {
             _context = context;
             _userManager = userManager;
-
-            if (_context.Goals.Count() == 0)
-            {
-                // Create a new Goal if collection is empty,
-                // which means you can't delete all Goals.
-                _context.Goals.Add(
-                    new Goal
-                    {
-                        Name = "Emergency Fund",
-                        Amount = 1000.00,
-                        Description = "One of the most important things to save for is an emergency. This is recommended as a first step."
-                    }
-                    );
-                _context.SaveChanges();
-            }
         }
 
         // GET: Goals
@@ -59,31 +44,30 @@ namespace FinGoals.Controllers
                 _context.Add(savingsAmount);
                 _context.SaveChanges();
             }
+            if (_context.Goals.Where(g => g.UserId == user.Id).Count() == 0)
+            {
+                // Create a new Goal if collection is empty,
+                // which means you can't delete all Goals.
+                _context.Goals.Add(
+                    new Goal
+                    {
+                        UserId = user.Id,
+                        Name = "Emergency Fund, your 1st goal",
+                        Amount = 1000.00,
+                        Description = "One of the most important things to save for is an emergency. This is recommended as a first step."
+                    }
+                    );
+                _context.SaveChanges();
+            }
             GoalIndexViewModel viewModel = new GoalIndexViewModel
             {
                 UserTotalSavings = savingsAmount.Amount,
-                Goals = _context.Goals.ToArray()
+                Goals = _context.Goals
+                .Where(g => g.UserId == user.Id)
+                
             };
 
             return View(viewModel);
-        }
-
-        // GET: Goals/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var goal = await _context.Goals
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (goal == null)
-            {
-                return NotFound();
-            }
-
-            return View(goal);
         }
 
         // GET: Goals/Create
@@ -99,8 +83,11 @@ namespace FinGoals.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,UserId,Name,Amount,Description,IsComplete")] Goal goal)
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
             if (ModelState.IsValid)
             {
+                goal.UserId = user.Id;
                 _context.Add(goal);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

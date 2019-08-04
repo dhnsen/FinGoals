@@ -4,9 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<p>
-    <a asp-action="Create">Add a Goal!</a>
-</p>
+
 <div class="form-group" style="display: block; text-align: center;">
     <h4>Savings Amount</h4>
     <p>Enter the amount you've saved and press "Update"</p>
@@ -18,6 +16,9 @@
 </div>
 
 <div id="goals-section">
+    <p>
+    <a asp-action="Create">Add a Goal!</a>
+</p>
     @{
 
         var savingsToDistribute = Model.UserTotalSavings;
@@ -57,7 +58,7 @@
 
             <div class="goal-container">
                 <div class="goal-container-info">
-                    <h3 class="goal-title">@Html.DisplayFor(modelItem => goal.Name)</h3>
+                    <h4 class="goal-title">@Html.DisplayFor(modelItem => goal.Name)</h4>
                     <p class="goal-amount-paid"><strong>$@amountSaved of $@Html.DisplayFor(modelItem => goal.Amount)</strong></p>
                 </div>
                 <br>
