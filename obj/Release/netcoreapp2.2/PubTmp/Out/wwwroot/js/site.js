@@ -7,7 +7,7 @@ let savingsAmount;
 //update amount
 const getSavingsAmount = function() {
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', '/api/SavingsAmount', true);
+    xhr.open('GET', 'https://localhost:5001/api/SavingsAmount', true);
 
     xhr.onload = function(){
         if(this.status == 200){
