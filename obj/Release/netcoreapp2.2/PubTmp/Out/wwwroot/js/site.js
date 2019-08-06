@@ -7,7 +7,7 @@ let savingsAmount;
 //update amount
 const getSavingsAmount = function() {
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://localhost:5001/api/SavingsAmount', true);
+    xhr.open('GET', '/api/SavingsAmount', true);
 
     xhr.onload = function(){
         if(this.status == 200){
@@ -24,7 +24,7 @@ const updateSavingsAmount = function() {
     savingsAmount.amount = document.getElementById("amount-saved").value;
     xhr = new XMLHttpRequest();
     let json = JSON.stringify(savingsAmount);
-    xhr.open('PUT', 'https://localhost:5001/api/SavingsAmount');
+    xhr.open('PUT', '/api/SavingsAmount');
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
     xhr.onload = function(){
         console.log(xhr.status)
