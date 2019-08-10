@@ -1,8 +1,36 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
-
 let savingsAmount;
+let savingsToDistribute;
+let totalSavingsRequired;
+let goals;
+
+const getGoals = function(){
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', '/api/Goals', true);
+
+    xhr.onload = function(){
+        if(this.status == 200){
+            goals = JSON.parse(this.responseText);
+            console.log(goals);
+            clearGoalsDisplay();
+            writeGoalsDisplay();
+        }
+    }
+    xhr.send();
+}
+
+function clearGoalsDisplay() {
+    goalNodes = document.getElementById("goal-list");
+    while (goalNodes.hasChildNodes()){
+        goalNodes.removeChild(goalsNodes.firstChild);
+    }
+}
+
+function writeGoalsDisplay() {
+
+}
 
 //update amount
 const getSavingsAmount = function() {
@@ -18,7 +46,7 @@ const getSavingsAmount = function() {
         }
     }
     xhr.send();
-}
+};
 
 const updateSavingsAmount = function() {
     savingsAmount.amount = document.getElementById("amount-saved").value;
@@ -31,7 +59,7 @@ const updateSavingsAmount = function() {
     }
     xhr.send(json);
     document.location.reload()
-}
+};
 
 document.getElementById('update-amount').addEventListener('click',
 updateSavingsAmount);
