@@ -29,7 +29,9 @@ function clearGoalsDisplay() {
 }
 
 function writeGoalsDisplay() {
-
+    goals.array.forEach(element => {
+        
+    });
 }
 
 //update amount
