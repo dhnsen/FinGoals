@@ -2,7 +2,8 @@
 let savingsAmount;
 let savingsToDistribute;
 let totalSavingsRequired;
-let goals;
+let goals = 
+[{}];
 
 const getGoals = function(){
     let xhr = new XMLHttpRequest();
@@ -27,14 +28,14 @@ function clearGoalsDisplay() {
 }
 
 function writeGoalsDisplay() {
-    // define the parent node
 
     goals.array.forEach(element => {
-        //append a child node to the parent with unique ID
-
-        //create variable for the child node
-
-        //set attributes for the node
+        //create the node
+        var goal = document.createElement("div");
+        //set the properties
+        goal.setAttribute("class", "democlass");
+        //append to the parent
+        document.getElementById("goal-list").appendChild(goal);
     });
 }
 
