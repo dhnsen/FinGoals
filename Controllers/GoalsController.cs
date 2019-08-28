@@ -26,7 +26,8 @@ namespace FinGoals.Controllers
         }
 
         // GET: Goals
-        
+        [Authorize]
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -34,6 +35,8 @@ namespace FinGoals.Controllers
             var savingsAmount = await _context.SavingsAmounts.FindAsync(id);
 
             // if there isn't, make one and save it
+            // this needs to be refactored into SavingsAmount
+            // then refactored to be called from the SavingsAmountController
             if (savingsAmount == null)
             {
                 savingsAmount = new SavingsAmount()
@@ -44,10 +47,12 @@ namespace FinGoals.Controllers
                 _context.Add(savingsAmount);
                 _context.SaveChanges();
             }
+            
             if (_context.Goals.Where(g => g.UserId == user.Id).Count() == 0)
             {
                 // Create a new Goal if collection is empty,
                 // which means you can't delete all Goals.
+                // This should be refactored into Goal Model
                 _context.Goals.Add(
                     new Goal
                     {
@@ -59,11 +64,12 @@ namespace FinGoals.Controllers
                     );
                 _context.SaveChanges();
             }
+
+            var goalList = GoalList.GetGoals(id);
             GoalIndexViewModel viewModel = new GoalIndexViewModel
             {
                 UserTotalSavings = savingsAmount.Amount,
-                Goals = _context.Goals
-                .Where(g => g.UserId == user.Id)
+                Goals = goalList
                 
             };
 

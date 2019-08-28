@@ -72,3 +72,4 @@ document.getElementById('update-amount').addEventListener('click',
 updateSavingsAmount);
 
 $(document).ready(getSavingsAmount);
+$(document).ready(getGoals);
