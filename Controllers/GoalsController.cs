@@ -65,15 +65,9 @@ namespace FinGoals.Controllers
                 _context.SaveChanges();
             }
 
-            var goalList = GoalList.GetGoals(id);
-            GoalIndexViewModel viewModel = new GoalIndexViewModel
-            {
-                UserTotalSavings = savingsAmount.Amount,
-                Goals = goalList
-                
-            };
+            
 
-            return View(viewModel);
+            return View();
         }
 
         // GET: Goals/Create
