@@ -66,3 +66,4 @@ C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\FinGoals.dll
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\FinGoals.pdb
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\FinGoals.csproj.CopyComplete
 C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\FinGoals.csprojAssemblyReference.cache
+C:\Users\Dan\Desktop\FinGoals\obj\Debug\netcoreapp2.2\Razor\Views\Dashboard\Index.g.cshtml.cs
