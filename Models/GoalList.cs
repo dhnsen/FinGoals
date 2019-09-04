@@ -12,12 +12,13 @@ namespace FinGoals.Models
 {
     public class GoalList
     {
+        private static string userId;
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-        
-        public async Task<IEnumerable<Goal>> GetGoals(string userId) 
-        { 
-            var goals = _context.Goals
+
+        public static IEnumerable<Goal> GetGoals()
+        {
+            IQueryable<Goal> goals = _context.Goals
                 .Where(g => g.UserId == userId);
             return goals;
         }
