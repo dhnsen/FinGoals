@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using FinGoals.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,5 +13,7 @@ namespace FinGoals.Data
             : base(options)
         {
         }
+        public DbSet<SavingsGoal> SavingsGoals { get; set; }
+        public DbSet<SavingsAmount> SavingsAmounts { get; set; }
     }
 }
