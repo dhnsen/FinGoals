@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinGoals", "FinGoals.csproj", "{07A92204-F57F-4A26-A0E3-66F52929758C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinGoals", "FinGoals.csproj", "{07A92204-F57F-4A26-A0E3-66F52929758C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinGoalsTests", "FinGoalsTests\FinGoalsTests.csproj", "{6E92E236-4678-4DE5-A7EF-0F08C276CDEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{07A92204-F57F-4A26-A0E3-66F52929758C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07A92204-F57F-4A26-A0E3-66F52929758C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07A92204-F57F-4A26-A0E3-66F52929758C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E92E236-4678-4DE5-A7EF-0F08C276CDEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E92E236-4678-4DE5-A7EF-0F08C276CDEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E92E236-4678-4DE5-A7EF-0F08C276CDEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E92E236-4678-4DE5-A7EF-0F08C276CDEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -30,21 +30,14 @@ namespace FinGoals.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            // get a user manager and the id of the current user
             var user = await _userManager.GetUserAsync(HttpContext.User);
             string id = user.Id;
-            var savingsAmount = await _context.SavingsAmounts.FindAsync(id);
 
-            // if there isn't, make one and save it
-            if (savingsAmount == null)
-            {
-                savingsAmount = new SavingsAmount()
-                {
-                    Id = id,
-                    Amount = 0
-                };
-                _context.Add(savingsAmount);
-                _context.SaveChanges();
-            }
+            //get the savings amount of the current user
+            var savingsAmount = new SavingsAmount();
+            var userSavingsAmount = savingsAmount.GetSavingsAmount(id);
+            
             if (_context.Goals.Where(g => g.UserId == user.Id).Count() == 0)
             {
                 // Create a new Goal if collection is empty,
